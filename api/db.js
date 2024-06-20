@@ -3,11 +3,11 @@ console.log(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, p
 
 const sequelize = new Sequelize({
     dialect: "mssql",
-    server: 'DESKTOP-H4I7H1I',
-    port: 31530,
-    database: 'qrCode',
-    username: 'sa',
-    password: '123456789'
+    server: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
 });
 
 sequelize.sync({ force: false })
