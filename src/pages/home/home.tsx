@@ -1,22 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {QrcodeModel} from "../../api/models/api.models";
-import customAxious from "../../api/axious";
 import AddFormQr from "../../components/AddFormQr";
 import ListqrBody from "../../components/ListBody/ListqrBody";
 import {useSearchParams} from "react-router-dom";
+import {customRequestAxiuos} from "../../api/customRequestAxiuos";
+import customAxious from "../../api/axious";
 
 const Home = () => {
     const [searchParams]=useSearchParams()
     const [items, setItems] = useState<QrcodeModel[]>([]);
 
     const fetchQrCodes = async () => {
-        const res = await customAxious.get<QrcodeModel[]>('qrs')
-        setItems(res.data)
+        await customRequestAxiuos(() => customAxious.get<QrcodeModel[]>('qrs'), async (data) => setItems(data))
     }
 
     useEffect(() => {
         fetchQrCodes()
-        customAxious.get("qrs").then(res => console.log(res.data))
     }, [])
 
     const title = searchParams.get('title')

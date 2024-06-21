@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, TextField} from "@mui/material";
 import customAxious from "../api/axious";
+import {customRequestAxiuos} from "../api/customRequestAxiuos";
 interface AddFormQrProps {
     onSubmitHandle: () => Promise<void>;
 }
@@ -13,10 +14,10 @@ const AddFormQr = (props: AddFormQrProps) => {
         event.preventDefault();
         if (!title) return
 
-        await customAxious.post('qrs', {title})
-        setTitle('')
-        await onSubmitHandle()
-
+       await customRequestAxiuos(() => customAxious.post('qrs', {title}), async () =>{
+            setTitle('')
+            await onSubmitHandle()
+        })
     }
 
     return (

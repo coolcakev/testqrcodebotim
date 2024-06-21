@@ -3,7 +3,7 @@ console.log(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, p
 
 const sequelize = new Sequelize({
     dialect: "mssql",
-    server: process.env.DB_HOST,
+    host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
